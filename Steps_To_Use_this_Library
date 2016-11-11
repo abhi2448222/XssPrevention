@@ -1,0 +1,32 @@
+README FOR XSS ATTACK PREVENTION : 
+
+Step 1 : Unzip the project folder provided : XssPrevention.zip
+
+Step 2 : It has the following set of files in it :
+			 
+			 a. XssPrevention.inc.php
+			 b. index.php
+			 c. Folder named "htmlpurifier-4.7.0-lite"
+
+The library implemented for this application is XssPrevention.inc.php
+
+Step 3 : To use the library in a developers php file, place the php file (index.php in our case) inside the XssPrevention folder. 
+
+Step 4 : Now inside the developers php file, put the following code in the begining of the file :
+
+include './XssPrevention.inc.php';    // imports the library
+$x = new XssPrevention();             // creates an object 
+
+
+Step 5 : Now the library has been imported and all we need to do is that we need to use any of our three functions (protectXSS(), protectXSSBlackListTags(), protectXSSpurifier()) at all the places where we are retreiving data using $_GET['input_name'] and $_POST['input_name']
+
+e.g: $x->protectXSS($_POST['comments']); (like I have shown in the index.php file on the line number 24 by using protectXSS() function for $_POST['comments'] . For using other functions, replace the protectXSS() function by either protectXSSBlackListTags() or  protectXSSpurifier())
+
+Step 6 : If all goes smooth, your web application has been made XSS secured.
+
+Step 7 : You can run the index.php (developers file) file on MAMP/XAMP to test the various test cases provided in the report. Preferably use firefox as other browsers have stricter policies against XSS pre installed.
+
+Step 8 : In case of any error, please check the path at the line number 55 in the library file XssPrevention.inc.php where we are importing HTML Purifier library : 
+
+require_once './htmlpurifier-4.7.0-lite/library/HTMLPurifier.auto.php';
+
